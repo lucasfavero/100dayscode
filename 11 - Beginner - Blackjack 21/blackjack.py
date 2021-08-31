@@ -1,8 +1,11 @@
 import random
+import art
 
 keep_playing = True
 
 while keep_playing:
+    print(art.logo)
+
     cards = [11, 2, 3, 4, 6, 7, 8, 9, 10, 10, 10, 10]
     player_cards = random.choices(cards, k=2)
     computer_cards = random.choices(cards, k=2)
