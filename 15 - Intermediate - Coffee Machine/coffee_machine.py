@@ -48,7 +48,7 @@ def validate_resources(option):
         return True
 
 
-def validate_coins(coins, option):
+def transaction(coins, option):
     global coins_inside
     if coins >= MENU[option]["cost"]:
         print(f"Value inserted: ${coins:.2f}. {option.capitalize()} costs: ${MENU[option]['cost']}. Your change is: "
@@ -61,13 +61,12 @@ def validate_coins(coins, option):
         return False
 
 
-def ask_coins():
-    quarters = float(input("How many quarters?: ")) * 0.25
-    dimes = float(input("How many dimes?: ")) * 0.10
-    nickles = float(input("How many nickles?: ")) * 0.05
-    pennies = float(input("How many pennies?: ")) * 0.01
-    result = quarters + dimes + nickles + pennies
-    return result
+def payment():
+    total = float(input("How many quarters?: ")) * 0.25
+    total += float(input("How many dimes?: ")) * 0.10
+    total += float(input("How many nickles?: ")) * 0.05
+    total += float(input("How many pennies?: ")) * 0.01
+    return total
 
 
 def remove_resources(option):
@@ -87,12 +86,11 @@ def report():
 def coffee_machine():
     while True:
         client_option = input("What would you like? Espresso, Latte or Cappuccino?. ").lower()
-
         if client_option == 'report':
             report()
         elif validate_resources(client_option):
-            inserted_coins = ask_coins()
-            if validate_coins(inserted_coins, client_option):
+            payed_coins = payment()
+            if transaction(payed_coins, client_option):
                 remove_resources(client_option)
                 print(f"Here is your: {client_option.capitalize()}")
 
